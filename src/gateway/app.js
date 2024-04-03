@@ -14,5 +14,5 @@ app.use("/", route);
 connect();
 
 app.listen(port, () => {
-  console.log("Server listening on " + port);
+  console.log("Server gateway listening on " + port);
 });

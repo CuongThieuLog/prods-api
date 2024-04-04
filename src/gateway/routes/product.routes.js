@@ -10,11 +10,10 @@ router.get("/", async (req, res) => {
         Authorization: req.headers.authorization.replace("Bearer ", ""),
       };
     }
-
-    const productsResponse = await axios.get("http://localhost:8003/product", {
+    const productsRes = await axios.get("http://localhost:8003/product", {
       headers,
     });
-    res.json(productsResponse.data);
+    res.json(productsRes.data);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch products" });
   }
@@ -29,13 +28,13 @@ router.get("/:id", async (req, res) => {
         Authorization: req.headers.authorization.replace("Bearer ", ""),
       };
     }
-    const productResponse = await axios.get(
+    const productRes = await axios.get(
       `http://localhost:8003/product/${productId}`,
       {
         headers,
       }
     );
-    res.json(productResponse.data);
+    res.json(productRes.data);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch products by id" });
   }
@@ -50,12 +49,12 @@ router.post("/", async (req, res) => {
         Authorization: req.headers.authorization.replace("Bearer ", ""),
       };
     }
-    const newProductResponse = await axios.post(
+    const newProductRes = await axios.post(
       "http://localhost:8003/product",
       productData,
       { headers }
     );
-    res.json(newProductResponse.data);
+    res.json(newProductRes.data);
   } catch (error) {
     res.status(500).json({ error: "Failed to create product" });
   }
@@ -72,12 +71,12 @@ router.put("/:id", async (req, res) => {
         Authorization: req.headers.authorization.replace("Bearer ", ""),
       };
     }
-    const updatedProductResponse = await axios.put(
+    const updatedProductRes = await axios.put(
       `http://localhost:8003/product/${productId}`,
       productData,
       { headers }
     );
-    res.json(updatedProductResponse.data);
+    res.json(updatedProductRes.data);
   } catch (error) {
     res.status(500).json({ error: "Failed to update product" });
   }
@@ -92,11 +91,11 @@ router.delete("/:id", async (req, res) => {
         Authorization: req.headers.authorization.replace("Bearer ", ""),
       };
     }
-    const deleteProductResponse = await axios.delete(
+    const deleteProductRes = await axios.delete(
       `http://localhost:8003/product/${productId}`,
       { headers }
     );
-    res.json(deleteProductResponse.data);
+    res.json(deleteProductRes.data);
   } catch (error) {
     res.status(500).json({ error: "Failed to delete product" });
   }

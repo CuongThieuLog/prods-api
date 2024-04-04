@@ -5,28 +5,21 @@ const axios = require("axios");
 router.post("/login", async (req, res) => {
   try {
     const loginData = req.body;
-    const loginResponse = await axios.post(
-      "http://localhost:8001/login",
-      loginData
-    );
-    res.json(loginResponse.data);
+    const loginRes = await axios.post("http://localhost:8001/login", loginData);
+    res.json(loginRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to login" });
+    res.status(500).json({ error: "Error login!" });
   }
 });
 
 router.post("/logout", async (req, res) => {
   try {
-    const logoutResponse = await axios.post(
-      "http://localhost:8001/logout",
-      null,
-      {
-        headers: { Authorization: req.headers.authorization },
-      }
-    );
-    res.json(logoutResponse.data);
+    const logoutRes = await axios.post("http://localhost:8001/logout", null, {
+      headers: { Authorization: req.headers.authorization },
+    });
+    res.json(logoutRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to logout" });
+    res.status(500).json({ error: "Error logout!" });
   }
 });
 

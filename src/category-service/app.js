@@ -4,7 +4,7 @@ const port = 8004;
 const app = express();
 const route = require("./routes/index");
 const bodyParser = require("body-parser");
-const handleError = require("./common/error");
+const handleError = require("../common/error");
 const connect = require("./database/mongoose");
 
 app.use(bodyParser.json());

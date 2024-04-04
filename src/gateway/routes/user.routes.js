@@ -5,24 +5,24 @@ const axios = require("axios");
 router.post("/register", async (req, res) => {
   try {
     const registerData = req.body;
-    const registerResponse = await axios.post(
+    const registerRes = await axios.post(
       "http://localhost:8002/register",
       registerData
     );
-    res.json(registerResponse.data);
+    res.json(registerRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to register" });
+    res.status(500).json({ error: "Error register!" });
   }
 });
 
-router.get("user/me", async (req, res) => {
+router.get("/user/me", async (req, res) => {
   try {
-    const meResponse = await axios.get("http://localhost:8002/user/me", null, {
+    const meRes = await axios.get("http://localhost:8002/user/me", {
       headers: { Authorization: req.headers.authorization },
     });
-    res.json(meResponse.data);
+    res.json(meRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch me" });
+    res.status(500).json({ error: "Error get me!" });
   }
 });
 

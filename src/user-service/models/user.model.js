@@ -63,7 +63,7 @@ UserSchema.methods.generateAuthToken = function () {
       _id: this._id,
       username: this.username,
     },
-    process.env.JWT_KEY
+    process.env.JWT_KEY || "local"
   );
   this.tokens = this.tokens.concat({ token });
   this.save();

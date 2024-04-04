@@ -1,27 +1,32 @@
-const UserService = require("../services/user.service");
+const User = require("../models/user.model");
 
 function UserController() {
   this.find = async (req, res) => {
-    return UserService.find(req, res);
+    return res.send(req.user);
   };
 
   this.register = (req, res) => {
-    return UserService.register(req, res);
-  };
+    try {
+      let user = new User();
 
-  this.login = async (req, res) => {
-    return UserService.login(req, res);
-  };
+      user.username = req.body.username;
+      user.email = req.body.email;
+      user.password = req.body.password;
 
-  this.logout = async (req, res) => {
-    return UserService.logout(req, res);
-  };
-
-  this.logoutAll = async (req, res) => {
-    return UserService.logoutAll(req, res);
+      user
+        .save()
+        .then(function () {
+          return res.json({ user: user.toAuthJSON() });
+        })
+        .catch(function (error) {
+          return res.status(400).json(error);
+        });
+    } catch (error) {
+      return res.status(400).json(error);
+    }
   };
 
   return this;
 }
 
-module.exports = new UserController();
+module.exports = UserController();

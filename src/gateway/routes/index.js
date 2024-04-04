@@ -6,7 +6,7 @@ const userRoutes = require("./user.routes");
 
 const router = express.Router();
 
-router.use("/product/", productRoutes);
+router.use("/product", productRoutes);
 router.use("/", authRoutes);
 router.use("/", userRoutes);
 

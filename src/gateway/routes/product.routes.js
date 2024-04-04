@@ -4,7 +4,16 @@ const axios = require("axios");
 
 router.get("/", async (req, res) => {
   try {
-    const productsResponse = await axios.get("http://localhost:8001/product");
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
+
+    const productsResponse = await axios.get("http://localhost:8003/product", {
+      headers,
+    });
     res.json(productsResponse.data);
   } catch (error) {
     res.status(500).json({ error: "Failed to fetch products" });
@@ -14,8 +23,17 @@ router.get("/", async (req, res) => {
 router.get("/:id", async (req, res) => {
   try {
     const productId = req.params.id;
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
     const productResponse = await axios.get(
-      `http://localhost:8001/product/${productId}`
+      `http://localhost:8003/product/${productId}`,
+      {
+        headers,
+      }
     );
     res.json(productResponse.data);
   } catch (error) {
@@ -26,9 +44,16 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const productData = req.body;
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
     const newProductResponse = await axios.post(
-      "http://localhost:8001/product",
-      productData
+      "http://localhost:8003/product",
+      productData,
+      { headers }
     );
     res.json(newProductResponse.data);
   } catch (error) {
@@ -40,9 +65,17 @@ router.put("/:id", async (req, res) => {
   try {
     const productId = req.params.id;
     const productData = req.body;
+
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
     const updatedProductResponse = await axios.put(
-      `http://localhost:8001/product/${productId}`,
-      productData
+      `http://localhost:8003/product/${productId}`,
+      productData,
+      { headers }
     );
     res.json(updatedProductResponse.data);
   } catch (error) {
@@ -53,8 +86,15 @@ router.put("/:id", async (req, res) => {
 router.delete("/:id", async (req, res) => {
   try {
     const productId = req.params.id;
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
     const deleteProductResponse = await axios.delete(
-      `http://localhost:8001/product/${productId}`
+      `http://localhost:8003/product/${productId}`,
+      { headers }
     );
     res.json(deleteProductResponse.data);
   } catch (error) {
@@ -65,8 +105,15 @@ router.delete("/:id", async (req, res) => {
 router.get("/remaining-quantity/:id", async (req, res) => {
   try {
     const productId = req.params.id;
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
     const remainingQuantityRes = await axios.get(
-      `http://localhost:8001/product/remaining-quantity/${productId}`
+      `http://localhost:8003/product/remaining-quantity/${productId}`,
+      { headers }
     );
     res.json(remainingQuantityRes.data);
   } catch (error) {

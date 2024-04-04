@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently \"npm run start-gateway\" \"npm run start-auth-service\" \"npm run start-user-service\"",
+    "start": "concurrently \"npm run start-gateway\" \"npm run start-auth-service\" \"npm run start-user-service\" \"npm run start-product-service\"",
     "start-gateway": "nodemon src/gateway/app.js",
     "start-auth-service": "nodemon src/auth-service/app.js",
-    "start-user-service": "nodemon src/user-service/app.js"
+    "start-user-service": "nodemon src/user-service/app.js",
+    "start-product-service": "nodemon src/product-service/app.js"
   },
   "keywords": [],
   "author": "",

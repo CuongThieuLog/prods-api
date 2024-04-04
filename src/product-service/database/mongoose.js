@@ -6,7 +6,7 @@ const connect = async () => {
     mongoose.connect(
       "mongodb+srv://devcuongtt:16062002@prod-db.9xfrb6c.mongodb.net/?retryWrites=true&w=majority&appName=prod-db"
     );
-    console.log("Connect database product successfully");
+    console.log("Connect database of user successfully");
   } catch (error) {
     console.log(error);
   }

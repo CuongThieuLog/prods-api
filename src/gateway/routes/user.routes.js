@@ -17,7 +17,7 @@ router.post("/register", async (req, res) => {
 
 router.get("user/me", async (req, res) => {
   try {
-    const meResponse = await axios.post("http://localhost:8002/user/me", null, {
+    const meResponse = await axios.get("http://localhost:8002/user/me", null, {
       headers: { Authorization: req.headers.authorization },
     });
     res.json(meResponse.data);

@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
     });
     res.json(productsRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch products" });
+    res.status(500).json({ error: "Error fetch products!" });
   }
 });
 
@@ -36,7 +36,7 @@ router.get("/:id", async (req, res) => {
     );
     res.json(productRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to fetch products by id" });
+    res.status(500).json({ error: "Error fetch products by id!" });
   }
 });
 
@@ -56,7 +56,7 @@ router.post("/", async (req, res) => {
     );
     res.json(newProductRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to create product" });
+    res.status(500).json({ error: "Error create product!" });
   }
 });
 
@@ -78,7 +78,7 @@ router.put("/:id", async (req, res) => {
     );
     res.json(updatedProductRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to update product" });
+    res.status(500).json({ error: "Error fetch update product" });
   }
 });
 
@@ -97,7 +97,7 @@ router.delete("/:id", async (req, res) => {
     );
     res.json(deleteProductRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to delete product" });
+    res.status(500).json({ error: "Error fetch delete product" });
   }
 });
 
@@ -116,7 +116,7 @@ router.get("/remaining-quantity/:id", async (req, res) => {
     );
     res.json(remainingQuantityRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Failed to remaining quantity product" });
+    res.status(500).json({ error: "Error fetch remaining quantity product!" });
   }
 });
 

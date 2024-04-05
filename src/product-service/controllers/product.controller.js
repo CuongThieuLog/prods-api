@@ -1,4 +1,4 @@
-// const Order = require("../models/order.model");
+const Order = require("../../order-service/models/order.model");
 const Product = require("../models/product.model");
 
 function ProductController() {
@@ -86,22 +86,22 @@ function ProductController() {
 
   // Admin/User
   this.getRemainingQuantity = async (req, res) => {
-    // try {
-    //   const productId = req.params.id;
-    //   const orders = await Order.find({ product: productId });
-    //   const totalOrderedQuantity = orders.reduce(
-    //     (total, order) => total + order.quantity,
-    //     0
-    //   );
-    //   const product = await Product.findById(productId);
-    //   if (!product) {
-    //     return res.status(404).json({ message: "Not Found!" });
-    //   }
-    //   const remainingQuantity = product.quantity - totalOrderedQuantity;
-    //   res.status(200).json({ remainingQuantity });
-    // } catch (error) {
-    //   res.status(400).json({ error: error.message });
-    // }
+    try {
+      const productId = req.params.id;
+      const orders = await Order.find({ product: productId });
+      const totalOrderedQuantity = orders.reduce(
+        (total, order) => total + order.quantity,
+        0
+      );
+      const product = await Product.findById(productId);
+      if (!product) {
+        return res.status(404).json({ message: "Not Found!" });
+      }
+      const remainingQuantity = product.quantity - totalOrderedQuantity;
+      res.status(200).json({ remainingQuantity });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
   };
 
   return this;

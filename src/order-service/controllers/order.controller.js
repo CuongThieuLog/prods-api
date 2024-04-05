@@ -49,11 +49,10 @@ function OrderController() {
     }
   };
 
-  // Lấy ra các đơn hàng của user đó (hoặc theo prams gửi lên các status)
-  this.getAllOrdersForCurrentUser = async (req, res) => {
+  // Tất cả đơn hàng và trạng thái đơn hàng của user đang đăng nhập
+  this.getAllOrderMySelf = async (req, res) => {
     try {
-      // const userId = req.user._id;
-      const userId = req.params.id;
+      const userId = req.user._id;
       let query = { user: userId };
       const status = req.query.status;
       if (

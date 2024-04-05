@@ -5,7 +5,7 @@ const roleAdmin = require("../middleware/admin.middleware");
 
 //private
 router.post("/", auth, OrderController.create);
-router.get("/user/:id", auth, OrderController.getAllOrdersForCurrentUser);
+router.get("/my-self", auth, OrderController.getAllOrderMySelf);
 router.put(
   "/update-status/:id",
   auth,

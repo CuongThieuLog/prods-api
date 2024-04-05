@@ -1,7 +1,7 @@
 let router = require("express").Router();
 const ProductController = require("../controllers/product.controller");
-const auth = require("../middleware/auth.middleware");
-const roleAdmin = require("../middleware/admin.middleware");
+const auth = require("../../middleware/auth.middleware");
+const roleAdmin = require("../../middleware/admin.middleware");
 
 //private
 router.get("/", auth, ProductController.getAll);

@@ -1,7 +1,7 @@
 let router = require("express").Router();
 const OrderController = require("../controllers/order.controller");
-const auth = require("../middleware/auth.middleware");
-const roleAdmin = require("../middleware/admin.middleware");
+const auth = require("../../middleware/auth.middleware");
+const roleAdmin = require("../../middleware/admin.middleware");
 
 //private
 router.post("/", auth, OrderController.create);

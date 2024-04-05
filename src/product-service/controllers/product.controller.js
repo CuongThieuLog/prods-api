@@ -26,7 +26,15 @@ function ProductController() {
   // Admin/User
   this.getAll = async (req, res) => {
     try {
-      const products = await Product.find();
+      let name = req.query.name;
+      let query = {};
+
+      if (name && name !== "") {
+        query.name = { $regex: name, $options: "i" };
+      }
+
+      const products = await Product.find(query);
+
       res.status(200).json({ data: products });
     } catch (error) {
       res.status(400).json({ error: error.message });

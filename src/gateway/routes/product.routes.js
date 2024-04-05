@@ -4,13 +4,18 @@ const axios = require("axios");
 
 router.get("/", async (req, res) => {
   try {
+    const params = req.query;
     let headers = {};
     if (req.headers.authorization) {
       headers = {
         Authorization: req.headers.authorization.replace("Bearer ", ""),
       };
     }
-    const productsRes = await axios.get("http://localhost:8003/product", {
+    let apiUrl = "http://localhost:8003/product";
+    if (params.name) {
+      apiUrl += `?name=${params.name}`;
+    }
+    const productsRes = await axios.get(apiUrl, {
       headers,
     });
     res.json(productsRes.data);
@@ -18,7 +23,6 @@ router.get("/", async (req, res) => {
     res.status(500).json({ error: "Error fetch products!" });
   }
 });
-
 router.get("/:id", async (req, res) => {
   try {
     const productId = req.params.id;

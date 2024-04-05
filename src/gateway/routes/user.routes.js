@@ -11,7 +11,7 @@ router.post("/register", async (req, res) => {
     );
     res.json(registerRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Error register!" });
+    res.status(500).json({ error: "Error fetch register!" });
   }
 });
 
@@ -22,7 +22,18 @@ router.get("/user/me", async (req, res) => {
     });
     res.json(meRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Error get me!" });
+    res.status(500).json({ error: "Error fetch get me!" });
+  }
+});
+
+router.get("/user", async (req, res) => {
+  try {
+    const meRes = await axios.get("http://localhost:8002/user", {
+      headers: { Authorization: req.headers.authorization },
+    });
+    res.json(meRes.data);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetch get me!" });
   }
 });
 

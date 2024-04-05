@@ -13,5 +13,7 @@ router.put(
   roleAdmin,
   OrderController.updateOrderStatus
 );
+router.get("/profit", auth, roleAdmin, OrderController.calculateTotalProfit);
+router.get("/income", auth, roleAdmin, OrderController.calculateTotalIncome);
 
 module.exports = router;

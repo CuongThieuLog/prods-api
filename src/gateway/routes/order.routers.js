@@ -82,4 +82,38 @@ router.put("/update-status/:id", async (req, res) => {
   }
 });
 
+router.get("/profit", async (req, res) => {
+  try {
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
+    const profitRes = await axios.get(`http://localhost:8005/order/profit`, {
+      headers,
+    });
+    res.json(profitRes.data);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetch profit!" });
+  }
+});
+
+router.get("/income", async (req, res) => {
+  try {
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
+    const incomeRes = await axios.get(`http://localhost:8005/order/income`, {
+      headers,
+    });
+    res.json(incomeRes.data);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetch income!" });
+  }
+});
+
 module.exports = router;

@@ -29,7 +29,18 @@ function UserController() {
   this.getAll = async (req, res) => {
     try {
       const users = await User.find();
-      res.status(200).json({ data: users });
+      const transformedData = users.map((user) => {
+        return {
+          _id: user._id,
+          role: user.role,
+          username: user.username,
+          email: user.email,
+          password: user.password,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        };
+      });
+      res.status(200).json({ data: transformedData });
     } catch (error) {
       res.status(400).json({ error: error.message });
     }

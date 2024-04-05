@@ -74,21 +74,28 @@ function OrderController() {
   // Cập nhật trạng thái của đơn hàng
   this.updateOrderStatus = async (req, res) => {
     try {
-      const orderId = req.params.id;
       const { status } = req.body;
 
-      const order = await Order.findById(orderId);
-      if (!order) {
+      if (
+        !["PENDING", "PROCESSING", "SHIPPED", "DELIVERED", "CANCELED"].includes(
+          status
+        )
+      ) {
+        return res.status(404).json({ message: "Status Not Found!" });
+      }
+      const updatedStatus = await Order.findByIdAndUpdate(
+        req.params.id,
+        { status },
+        { new: true }
+      );
+      if (!updatedStatus) {
         return res.status(404).json({ message: "Not Found!" });
       }
-
-      order.status = status;
-      await order.save();
-
-      res.status(200).json({ message: "Order status updated successfully" });
+      res
+        .status(200)
+        .json({ message: "Updated successfully", data: updatedStatus });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Error" });
+      res.status(400).json({ error: error.message });
     }
   };
 

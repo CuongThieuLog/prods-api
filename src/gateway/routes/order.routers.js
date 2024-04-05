@@ -46,24 +46,22 @@ router.get("/my-self", async (req, res) => {
 
 router.put("/update-status/:id", async (req, res) => {
   try {
+    const orderId = req.params.id;
+    const status = req.body;
     let headers = {};
     if (req.headers.authorization) {
       headers = {
         Authorization: req.headers.authorization.replace("Bearer ", ""),
       };
     }
-    const orderId = req.params.id;
-    const { status } = req.body;
-    const orderUpdateStatusRes = await axios.put(
+    const updateStatusRes = await axios.put(
       `http://localhost:8005/order/update-status/${orderId}`,
       status,
-      {
-        headers,
-      }
+      { headers }
     );
-    res.json(orderUpdateStatusRes.data);
+    res.json(updateStatusRes.data);
   } catch (error) {
-    res.status(500).json({ error: "Error fetch update status order!" });
+    res.status(500).json({ error: "Error fetch status!" });
   }
 });
 

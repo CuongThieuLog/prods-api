@@ -4,6 +4,7 @@ const auth = require("../../middleware/auth.middleware");
 const roleAdmin = require("../../middleware/admin.middleware");
 
 //private
+router.get("/", auth, roleAdmin, OrderController.getAll);
 router.post("/", auth, OrderController.create);
 router.get("/my-self", auth, OrderController.getAllOrderMySelf);
 router.put(

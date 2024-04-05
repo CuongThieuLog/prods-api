@@ -2,6 +2,16 @@ const Order = require("../models/order.model");
 const Product = require("../../product-service/models/product.model");
 
 function OrderController() {
+  // Tất cả đơn hàng
+  this.getAll = async (req, res) => {
+    try {
+      const orders = await Order.find();
+      res.status(200).json({ data: orders });
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  };
+
   // Tạo đơn hàng
   this.create = async (req, res) => {
     try {

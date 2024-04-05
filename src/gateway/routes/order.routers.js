@@ -2,6 +2,23 @@ const express = require("express");
 const router = express.Router();
 const axios = require("axios");
 
+router.get("/", async (req, res) => {
+  try {
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
+    const ordersRes = await axios.get("http://localhost:8005/order", {
+      headers,
+    });
+    res.json(ordersRes.data);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetch orders!" });
+  }
+});
+
 router.post("/", async (req, res) => {
   try {
     let headers = {};

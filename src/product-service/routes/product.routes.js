@@ -14,5 +14,6 @@ router.get(
   auth,
   ProductController.getRemainingQuantity
 );
+router.get("/inventory/all", auth, ProductController.getInventoryProducts);
 
 module.exports = router;

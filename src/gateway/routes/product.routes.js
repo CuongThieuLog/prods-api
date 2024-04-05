@@ -124,4 +124,24 @@ router.get("/remaining-quantity/:id", async (req, res) => {
   }
 });
 
+router.get("/inventory/all", async (req, res) => {
+  try {
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
+    const productRes = await axios.get(
+      "http://localhost:8003/product/inventory/all",
+      {
+        headers,
+      }
+    );
+    res.json(productRes.data);
+  } catch (error) {
+    res.status(500).json({ error: "Error inventory product!" });
+  }
+});
+
 module.exports = router;

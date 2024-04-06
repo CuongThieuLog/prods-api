@@ -4,7 +4,7 @@ const connect = async () => {
   try {
     mongoose.Promise = global.Promise;
     mongoose.connect(
-      "mongodb+srv://thieutrancuonglog:16062002@project.rgbybd6.mongodb.net/?retryWrites=true&w=majority&appName=Project"
+      "mongodb+srv://devcuongtt:16062002@prod-db.9xfrb6c.mongodb.net/?retryWrites=true&w=majority&appName=prod-db"
     );
     console.log("Connect database of category successfully");
   } catch (error) {

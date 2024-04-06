@@ -28,7 +28,12 @@ function UserController() {
 
   this.getAll = async (req, res) => {
     try {
-      const users = await User.find();
+      let name = req.query.name;
+      let query = {};
+      if (name && name !== "") {
+        query.username = { $regex: name, $options: "i" };
+      }
+      const users = await User.find(query);
       const transformedData = users.map((user) => {
         return {
           _id: user._id,

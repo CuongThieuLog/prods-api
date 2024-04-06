@@ -28,7 +28,12 @@ router.get("/user/me", async (req, res) => {
 
 router.get("/user", async (req, res) => {
   try {
-    const meRes = await axios.get("http://localhost:8002/user", {
+    const params = req.query;
+    let apiUrl = "http://localhost:8002/user";
+    if (params.name) {
+      apiUrl += `?name=${params.name}`;
+    }
+    const meRes = await axios.get(apiUrl, {
       headers: { Authorization: req.headers.authorization },
     });
     res.json(meRes.data);

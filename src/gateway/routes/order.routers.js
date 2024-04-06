@@ -116,4 +116,23 @@ router.get("/income", async (req, res) => {
   }
 });
 
+router.delete("/:id", async (req, res) => {
+  try {
+    const orderId = req.params.id;
+    let headers = {};
+    if (req.headers.authorization) {
+      headers = {
+        Authorization: req.headers.authorization.replace("Bearer ", ""),
+      };
+    }
+    const deleteOrderRes = await axios.delete(
+      `http://localhost:8005/order/${orderId}`,
+      { headers }
+    );
+    res.json(deleteOrderRes.data);
+  } catch (error) {
+    res.status(500).json({ error: "Error fetch delete order!" });
+  }
+});
+
 module.exports = router;

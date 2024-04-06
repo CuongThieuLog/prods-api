@@ -148,6 +148,28 @@ function OrderController() {
     }
   };
 
+  this.deleteOrder = async (req, res) => {
+    try {
+      const orderId = req.params.id;
+      const userId = req.user._id;
+      const isAdmin = req.user.isAdmin;
+      const order = await Order.findById(orderId);
+      if (!order) {
+        return res.status(404).json({ message: "Order not found" });
+      }
+      if (order.user.toString() !== userId.toString() && !isAdmin) {
+        return res
+          .status(403)
+          .json({ message: "Unauthorized to delete this order" });
+      }
+      await order.remove();
+      res.status(200).json({ message: "Order deleted successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Error" });
+    }
+  };
+
   return this;
 }
 

@@ -16,7 +16,12 @@ function CategoryController() {
   // Admin
   this.getAll = async (req, res) => {
     try {
-      const categories = await Category.find();
+      let name = req.query.name;
+      let query = {};
+      if (name && name !== "") {
+        query.name = { $regex: name, $options: "i" };
+      }
+      const categories = await Category.find(query);
       res.status(200).json({ data: categories });
     } catch (error) {
       res.status(400).json({ error: error.message });

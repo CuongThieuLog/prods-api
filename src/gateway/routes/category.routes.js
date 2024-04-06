@@ -4,13 +4,18 @@ const axios = require("axios");
 
 router.get("/", async (req, res) => {
   try {
+    const params = req.query;
     let headers = {};
     if (req.headers.authorization) {
       headers = {
         Authorization: req.headers.authorization.replace("Bearer ", ""),
       };
     }
-    const categoryRes = await axios.get("http://localhost:8004/category", {
+    let apiUrl = "http://localhost:8004/category";
+    if (params.name) {
+      apiUrl += `?name=${params.name}`;
+    }
+    const categoryRes = await axios.get(apiUrl, {
       headers,
     });
     res.json(categoryRes.data);
